@@ -5,10 +5,10 @@ import * as types from "./actionTypes";
 const register = (payload) => (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST });
   return axios
-    .post("https://thawing-plains-60298.herokuapp.com/signup", payload)
+    .post("https://stark-plains-12148.herokuapp.com/user/signup", payload)
     .then((r) => {
       console.log(r);
-      dispatch({ type: types.REGISTER_SUCCESS, payload: r });
+     return dispatch({ type: types.REGISTER_SUCCESS, payload: r });
     }).catch((e) => dispatch({ type: types.REGISTER_FAILURE, payload: e }));
 };
 

@@ -15,14 +15,6 @@ export default function Sidebar() {
     
     const navigate = useNavigate();
     const toast =useToast()
-    
-    
-    // useEffect(() => {
-    //   axios.get("https://thawing-plains-60298.herokuapp.com/signin").then((r)=>{
-    //     setInfo(r)
-    //    }).catch((e)=>{console.log(e)})
-     
-    // }, []);
    
     const loginHandler = () => {
      const email=mail
@@ -31,10 +23,9 @@ export default function Sidebar() {
       console.log(password)
 
 
-      axios.post("https://thawing-plains-60298.herokuapp.com/signin",{email, password}).then((r)=>{
+      axios.post("https://stark-plains-12148.herokuapp.com/user/login",{email, password}).then((r)=>{
         console.log(r);
-        if(r.data=="sign in successfully"){
-          // console.log("hey babay")
+        if(r.data.msg=="Login Successfull"){
           toast({
             title: 'Sign In Successfully',
             description: "Lets Plan Your Day",
@@ -48,7 +39,6 @@ export default function Sidebar() {
             }, 1000)
           )  
         }
-        // if closed
       else{
         return ( toast({
           title: 'Oops ! Entered wrong credentials',
@@ -61,40 +51,7 @@ export default function Sidebar() {
         )
       }
       }).catch((e)=>{console.log(e)})
-    
-    
-      // if(info){
-    
-    // for(let i=0;i<info.length;i++)
-    // {
-      
-    //   if(info[i].email===mail && info[i].password===pass){
-          
-      // toast({
-      //       title: 'Sign In Successfully',
-      //       description: "Lets Plan Your Day",
-      //       status: 'success',
-      //       duration: 1000,
-      //       isClosable: true,
-      //       position:'top',
-      //     }) 
-      // return ( setTimeout(() => {
-      //         navigate("/company")
-      //       }, 3000)
-      //     )  
-       
-      
-      // return ( toast({
-      //   title: 'Oops ! Entered wrong credentials',
-      //   description: "Lets Try Again",
-      //   status: 'error',
-      //   duration: 1000,
-      //   isClosable: true,
-      //   position:'top'
-      // })
-      // )
 
-    // }
 
     };
 

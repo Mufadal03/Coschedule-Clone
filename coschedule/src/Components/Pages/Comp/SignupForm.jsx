@@ -36,7 +36,6 @@ const SignupForm = () => {
   const navigate = useNavigate();
   const toast =useToast()
 
-  const symb_email="@."
 
   const signupHandle = () => {
     let naav=state.name
@@ -49,43 +48,53 @@ const SignupForm = () => {
         position:'top',
       }) 
     }
-    let funda=state.email
-    // console.log(funda)
-    // console.log(symb_email);
-    if(!funda.includes('@') || !funda.includes('.') || !funda.includes('com') ){
-      return toast({
+    dispatch(register(state)).then((r) => {
+      console.log(r.payload.data.msg)
+      if (r.payload.data.msg === "Enter valid email") {
+        return toast({
         title: 'Email type is incorrect',
         description: 'Please enter right email',
         status: 'error',
         isClosable: true,
         position:'top',
       }) 
-    }
-    let pascode=state.password
-    console.log(pascode);
-    if(!((pascode.includes('!') || pascode.includes('@') || pascode.includes('&') || pascode.includes('^') || pascode.includes('*') 
-    || pascode.includes('/') || pascode.includes('?')) && (pascode.includes('1')) ) ) {
-      return toast({
+      }
+      if (r.payload.data.msg === "Password should be greater than or equal to 8 and includes special character") {
+        return toast({
         title: 'Password must be strong',
         description: 'Password must contain any symbol and must contain any number @,#,1,2 etc',
         status: 'error',
         isClosable: true,
         position:'top',
       }) 
-    }
-    dispatch(register(state)).then((r) => {
-    console.log(r)
-      toast({
-        title: 'Account Created Successfully',
-        description: 'Youre being redirected to login page',
-        status: 'success',
+      }
+      if (r.payload.data.msg === "User Already exist") {
+        return toast({
+        title: 'User already exist',
+        description: 'This email is already registered',
+        status: 'error',
         isClosable: true,
         position:'top',
       }) 
-      setTimeout(() => {
-         navigate("/login", { replace: true })  
-      }, 1000); 
+      }
+      if (r.payload.data.msg === "Signup Successfull") {
+        
+        toast({
+          title: 'Account Created Successfully',
+          description: 'Youre being redirected to login page',
+          status: 'success',
+          isClosable: true,
+          position: 'top',
+        })
+        setTimeout(() => {
+          navigate("/login")
+        }, 1000);
+      }
+      
     });
+      
+    
+    
   };
 
     const changeShadow=()=>{
