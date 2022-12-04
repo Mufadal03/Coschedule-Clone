@@ -23,7 +23,7 @@ export default function Sidebar() {
       console.log(password)
 
 
-      axios.post("https://stark-plains-12148.herokuapp.com/user/login",{email, password}).then((r)=>{
+      axios.post("https://co-schedule-backend-deployment.vercel.app/user/login",{email, password}).then((r)=>{
         console.log(r);
         if(r.data.msg=="Login Successfull"){
           toast({

@@ -5,7 +5,7 @@ import * as types from "./actionTypes";
 const register = (payload) => (dispatch) => {
   dispatch({ type: types.REGISTER_REQUEST });
   return axios
-    .post("https://stark-plains-12148.herokuapp.com/user/signup", payload)
+    .post("https://co-schedule-backend-deployment.vercel.app/user/signup", payload)
     .then((r) => {
       console.log(r);
      return dispatch({ type: types.REGISTER_SUCCESS, payload: r });
